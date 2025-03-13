@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Slider</title>
+    <style>
+        body {
+            background: #f5f5f5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .carousel {
+            position: relative;
+            width: 200%;
+            max-width: 2900px;
+            overflow: hidden;
+            border-radius: 30px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .slides {
+            display: flex;
+            width: 100%;
+            transition: transform 1.5s ease-in-out;
+        }
+
+        .slide {
+            width: 300%;
+            flex: 0 0 100%;
+        }
+
+        .slide img {
+            width: 100%;
+            height: auto;
+            max-height: 3600px;
+            object-fit: cover;
+            display: block;
+        }
+
+        .controls {
+            position: absolute;
+            bottom: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 8px;
+        }
+
+        .controls label {
+            width: 12px;
+            height: 12px;
+            background: white;
+            border-radius: 50%;
+            cursor: pointer;
+        }
+
+        .arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(255, 255, 255, 0.7);
+            padding: 30px;
+            border-radius: 400%;
+            cursor: pointer;
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        .arrow-left {
+            left: 40px;
+        }
+
+        .arrow-right {
+            right: 40px;
+        }
+    </style>
+</head>
+<body>
+    <div class="carousel">
+        <div class="slides">
+            <div class="slide" id="s1"><img src="https://www.littledogsocialmedia.com/wp-content/uploads/2019/05/Winter_2024_Little_Dog_Website_Sliders-1.jpg" alt="Image 1"></div>
+            <div class="slide" id="s2"><img src="https://www.littledogsocialmedia.com/wp-content/uploads/2019/05/Team_Collage_Slider.jpg" alt="Image 2"></div>
+            <div class="slide" id="s3"><img src="https://www.littledogsocialmedia.com/wp-content/uploads/2019/05/3-4.png" alt="Image 3"></div>
+            <div class="slide" id="s4"><img src="https://www.littledogsocialmedia.com/wp-content/uploads/2019/05/4-4.png" alt="Image 4"></div>
+        </div>
+        <div class="arrow arrow-left" onclick="prevSlide()">&#10094;</div>
+        <div class="arrow arrow-right" onclick="nextSlide()">&#10095;</div>
+    </div>
+
+    <script>
+        let index = 0;
+        const slides = document.querySelector('.slides');
+        const totalSlides = document.querySelectorAll('.slide').length;
+
+        function nextSlide() {
+            index = (index + 1) % totalSlides;
+            updateSlide();
+        }
+
+        function prevSlide() {
+            index = (index - 1 + totalSlides) % totalSlides;
+            updateSlide();
+        }
+
+        function updateSlide() {
+            slides.style.transform = `translateX(${-index * 100}%)`;
+        }
+
+        setInterval(nextSlide, 3000);
+    </script>
+</body>
+</html>
